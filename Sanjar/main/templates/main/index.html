@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF=8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+</head>
+<body>
+    <h1 class="title">Добро пожаловать!</h1>
+    {% for post in articles %}
+        <div style="border: 2px solid green; padding: 10px; margin-top: 10px;">
+            <h2>{{post.title}}</h2><p>{{post.text}}</p></div>
+    {% endfor %}
+</body>
+</html>

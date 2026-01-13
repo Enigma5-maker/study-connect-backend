@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{post.title}}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="article-card" style="border: 3px solid green; padding: 20px;">
+        <h1>{{ post.title }}</h1>
+        <hr>
+        <p>{{ post.text }}</p>
+        <br>
+        <a href="{% url 'home' %}"></a>
+    </div>
+</body>
+</html>
