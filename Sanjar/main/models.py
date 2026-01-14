@@ -1,10 +1,19 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class Article(models.Model):
-    title=models.CharField(max_length=200)
-    text = models.TextField()
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    def _str_(self): return self.name
 
-    def __str__(self):
-        return self.title
+class StudyGroup(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_groups')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    users = models.ManyToManyField(User, through='Membership', related_name='study_groups')
+    max_slots = models.PositiveIntegerField(default=6)
 
-# Create your models here.
+class Membership(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(StudyGroup, on_delete=models.CASCADE)
+    date_joined = models.DateTimeField(auto_now_add=True)
